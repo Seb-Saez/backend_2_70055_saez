@@ -12,17 +12,22 @@ const __filename = fileURLToPath(import.meta.url);
 
 export const __dirname = dirname(__filename);
 
-export const getJWTCookie = (req) => {
-    let token = null;
-    console.log(req)
-    if(req.signedCookies){
-        token = req.signedCookies['currentUser']
-    }
-    console.log(token, '<=== desde el metodo de extraccion')
+
+export const generadorToken = (user) => {
+    
+    const token = jwt.sign(user.toObject(), process.env.SECRET, { expiresIn: '24h' });
     return token
 }
 
-export const generadorToken = (user) => {
-    const token = jwt.sign(user,process.env.SECRET,{ expiresIn: '1m' })
-    return token
+
+export const decodeToken = (req, res, next) => {
+    const token = req.headers.authorization
+    console.log(token)
+    if(!token) res.status(400).json({message: 'Error al obtener el token'});
+    jwt.verify(token, process.env.SECRET, (err, userDecoded) => {
+        if(err) res.status(400).json({message: 'Token invalido'})
+            console.log(userDecoded)
+        req.user = userDecoded.user;
+        next()
+    })
 }

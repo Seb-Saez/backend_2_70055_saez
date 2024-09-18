@@ -6,13 +6,11 @@ const userCollection = 'users';
 const userSchema = new Schema({
     
     first_name: String,
-    last_name: {
-        type: String,
-        unique: true,
-    },
+    last_name: String,
     email: {
         type: String,
         unique: true,
+        required: true
     },
     age: Number,
     password: {
