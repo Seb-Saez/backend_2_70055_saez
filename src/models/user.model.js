@@ -1,6 +1,9 @@
 import mongoose, { Schema, model } from "mongoose";
 
 
+// Creacion del modelo del ticket
+
+
 const userCollection = 'users';
 
 const userSchema = new Schema({

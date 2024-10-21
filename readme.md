@@ -1,10 +1,6 @@
 Instrucciones para el funcionamiento:
 
---------------------------------------
-.ENV:
-MONGO_URI = mongodb+srv://sebastiansaez:hipH7OsAVhpG7dAH@coderback-1-70050.vmsndmx.mongodb.net/?retryWrites=true&w=majority&appName=CoderBack-1-70050
-SECRET = "sebcoder"
---------------------------------------
+
 
 ► Registrar/ crear un usuario:
 

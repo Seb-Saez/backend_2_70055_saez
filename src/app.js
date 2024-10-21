@@ -3,21 +3,23 @@ import mongoose from 'mongoose';
 import { __dirname } from './utils.js';
 import userRouter from './routes/users.route.js';
 import dotenv from 'dotenv';
+import productRouter from './routes/products.route.js';
+import cartRouter from './routes/cart.router.js';
 
 // config de variables de entorno
 dotenv.config();
+const PORT = process.env.PORT || 3030;
 
 
 const app = express();
-const PORT = 8080 || 3030;
 
 // congi json
 app.use(express.json());
-app.use
 
 // ROUTES
 app.use('/api/sessions', userRouter )
-
+app.use('/api', productRouter);
+app.use('/api', cartRouter);
 
 
 
