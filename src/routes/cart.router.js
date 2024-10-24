@@ -1,5 +1,5 @@
 import express from 'express';
-import { authorizeRol } from '../middlewares/authorization.js';
+import { authorizeRol } from '../middlewares/authRole.js';
 
 const router = express.Router();
 
