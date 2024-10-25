@@ -1,22 +1,10 @@
-import { type } from "express/lib/response";
-import mongoose, { Schema } from "mongoose";
+import mongoose from 'mongoose';
 
-const TicketSchema = new mongoose.Schema({
-    purchase_date: {
-        type: Date,
-        default: Date.now
-    },
-    amount: {
-        type: Number,
-        required: true
-    },
-    user:{
-        type: String,
-        required: true
-    }
+const ticketSchema = new mongoose.Schema({
+    code: { type: String, unique: true, required: true },
+    purchase_datetime: { type: Date, required: true },
+    amount: { type: Number, required: true },
+    purchaser: { type: String, required: true }
 });
 
-
-const Ticket = mongoose.model('Tickets', ticketSchema);
-
-export default Ticket;
+export const TicketModel = mongoose.model('Ticket', ticketSchema);
