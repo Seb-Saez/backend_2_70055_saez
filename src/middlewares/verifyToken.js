@@ -11,7 +11,7 @@ export const verifyToken = (req, res, next) => {
   }
 // si viene un token intentar validarlo
   try {
-    const decoded = jwt.verify(token.split(' ')[1], process.env.SECRET);
+    const decoded = jwt.verify(token, process.env.SECRET);
     req.user = decoded;
     next();
   } catch (error) {

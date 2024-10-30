@@ -2,13 +2,10 @@ import jwt from 'jsonwebtoken';
 
 export const authorizeRol = (requiredRole) => {
     return (req, res, next) => {
-        const authHeader = req.headers['authorization'];
-        if (!authHeader) {
+        const token = req.headers['authorization'];
+        if (!token) {
             return res.status(403).json({ message: 'No se proporcionó un token' });
         }
-
-        const token = authHeader.split(' ')[1];            // Obtenemos el token excluyendo 'Bearer'
-       //console.log("Token recibido:", token);               //  Imprimimos el token recibido para verificar que lo estemos recibiendo
 
 
         try {

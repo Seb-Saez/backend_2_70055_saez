@@ -49,7 +49,7 @@ Hacer una request tipo GET a la ruta    http://localhost:8080/api/sessions/curre
 
 Y por header enviar:
 
-Authorization Bearer (token que nos devuelve en login)
+Authorization (token que nos devuelve en login)
 
 
 
@@ -75,7 +75,7 @@ y ademas enviar el token de administrador que debemos obtener al crear un usuari
 
 header:
 
- - Authorization Bearer (token que nos devuelve en login)
+ - Authorization (token que nos devuelve en login)
  - Content-Type application/json       ** sin esto no funciona
 
 
@@ -97,7 +97,7 @@ y ademas enviar el token de administrador que debemos obtener al crear un usuari
 
 header:
 
-Authorization Bearer (token que nos devuelve en login)
+Authorization (token que nos devuelve en login)
 
 
 
@@ -111,7 +111,7 @@ y ademas enviar el token de administrador que debemos obtener al crear un usuari
 
 header:
 
-Authorization Bearer (token que nos devuelve en login)
+Authorization (token que nos devuelve en login)
 
 
 
@@ -126,7 +126,7 @@ y ademas enviar el token de administrador que debemos obtener al crear un usuari
 
 header:
 
-Authorization Bearer (token que nos devuelve en login)
+Authorization (token que nos devuelve en login)
 
 ► Obtener la informacion de un carrito por id
 
@@ -137,7 +137,7 @@ GET a http://localhost:8080/api/cart/:cid
 ► Agregar un producto al carrito
 
 
-POST a http://localhost:8080/api/cart/cid/products/:pid
+POST a http://localhost:8080/api/cart/:cid/products/:pid
 
 header:
 
@@ -153,6 +153,6 @@ POST a http://localhost:8080/api/cart/:cid/purchase
 
 header: 
 
-Authorization Bearer (token que nos devuelve en login)
+Authorization (token que nos devuelve en login)
 
 

@@ -5,6 +5,7 @@ import userRouter from './routes/users.route.js';
 import dotenv from 'dotenv';
 import productRouter from './routes/products.route.js';
 import cartRouter from './routes/cart.router.js';
+import MongoSingleton from './mongo/mongo.conection.js';
 
 // config de variables de entorno
 dotenv.config();
@@ -24,11 +25,11 @@ app.use('/api/cart', cartRouter);
 
 
 // conectar BBDD mongo
-mongoose.connect(process.env.MONGO_URI, {dbName: 'coderBackend_2'})
-    .then(() => { console.log('BBDD connectada!')})
-.catch(() => {
-    console.log('Error al conectarse a la bbdd')
-})
+// mongoose.connect(process.env.MONGO_URI, {dbName: 'coderBackend_2'})
+//     .then(() => { console.log('BBDD connectada!')})
+// .catch(() => {
+//     console.log('Error al conectarse a la bbdd')
+// })
 
 
 
