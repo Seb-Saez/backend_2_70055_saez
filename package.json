@@ -2,7 +2,7 @@
   "name": "70055-backend_2_proyecto_final_saez",
   "version": "1.0.0",
   "type": "module",
-  "description": "",
+  "description": "Instrucciones para el funcionamiento:",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,11 +14,13 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
+    "dotenv": "16.4.5",
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.1",
     "nodemon": "^3.1.4",
-    "dotenv": "16.4.5"
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }

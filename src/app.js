@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 import productRouter from './routes/products.route.js';
 import cartRouter from './routes/cart.router.js';
 import MongoSingleton from './mongo/mongo.conection.js';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocs from './middlewares/swagger.js';
 
 // config de variables de entorno
 dotenv.config();
@@ -14,23 +16,16 @@ const PORT = process.env.PORT || 3030;
 
 const app = express();
 
-// congi json
+// conifg json
 app.use(express.json());
+
+// config swagger
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // ROUTES
 app.use('/api/sessions', userRouter )
 app.use('/api/products', productRouter);
 app.use('/api/cart', cartRouter);
-
-
-
-// conectar BBDD mongo
-// mongoose.connect(process.env.MONGO_URI, {dbName: 'coderBackend_2'})
-//     .then(() => { console.log('BBDD connectada!')})
-// .catch(() => {
-//     console.log('Error al conectarse a la bbdd')
-// })
-
 
 
 // levantar server

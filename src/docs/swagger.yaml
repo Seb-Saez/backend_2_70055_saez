@@ -1,0 +1,292 @@
+openapi: 3.0.0
+info:
+  title: API Documentation
+  description: Documentación de la API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Servidor local
+paths:
+  /api/sessions/register:
+    post:
+      summary: Registro de usuario
+      description: Permite registrar un nuevo usuario con sus datos.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  example: John
+                last_name:
+                  type: string
+                  example: Doe
+                email:
+                  type: string
+                  example: johndoe@example.com
+                age:
+                  type: integer
+                  example: 25
+                password:
+                  type: string
+                  example: password123
+                role:
+                  type: string
+                  example: user
+      responses:
+        201:
+          description: Usuario creado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: El usuario fue creado con éxito
+                  user:
+                    type: object
+                    properties:
+                      first_name:
+                        type: string
+                      last_name:
+                        type: string
+                      email:
+                        type: string
+                      age:
+                        type: integer
+                      role:
+                        type: string
+        400:
+          description: Error al crear el usuario.
+  /api/sessions/login:
+    post:
+      summary: Login de usuario
+      description: Permite a un usuario iniciar sesión con sus credenciales.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: johndoe@example.com
+                password:
+                  type: string
+                  example: password123
+      responses:
+        200:
+          description: Inicio de sesión exitoso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Login exitoso
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1Ni...
+                  user:
+                    type: object
+                    properties:
+                      first_name:
+                        type: string
+                      last_name:
+                        type: string
+                      email:
+                        type: string
+                      age:
+                        type: integer
+                      role:
+                        type: string
+        401:
+          description: Credenciales inválidas.
+        404:
+          description: El usuario no existe.
+        500:
+          description: Error interno al iniciar sesión.
+  /api/sessions/current:
+    get:
+      summary: Obtener usuario actual
+      description: Devuelve información del usuario autenticado.
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Acceso permitido.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Acceso permitido
+                  user:
+                    type: object
+                    properties:
+                      first_name:
+                        type: string
+                      last_name:
+                        type: string
+                      email:
+                        type: string
+                      age:
+                        type: integer
+                      role:
+                        type: string
+        401:
+          description: Usuario no autenticado.
+  /api/products:
+    post:
+      summary: Crear un nuevo producto
+      description: Permite a los administradores crear un nuevo producto en el sistema.
+      tags:
+        - Productos
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nombre del producto.
+                price:
+                  type: number
+                  description: Precio del producto.
+                stock:
+                  type: integer
+                  description: Cantidad en stock.
+              required:
+                - name
+                - price
+                - stock
+      responses:
+        201:
+          description: Producto creado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  product:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      price:
+                        type: number
+                      stock:
+                        type: integer
+        400:
+          description: Error al crear el producto.
+  /api/products/{id}:
+    put:
+      summary: Actualizar un producto
+      description: Permite a los administradores actualizar un producto existente por ID.
+      tags:
+        - Productos
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del producto a actualizar.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Nuevo nombre del producto.
+                price:
+                  type: number
+                  description: Nuevo precio del producto.
+                stock:
+                  type: integer
+                  description: Nueva cantidad en stock.
+              required:
+                - name
+                - price
+                - stock
+      responses:
+        200:
+          description: Producto actualizado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  product:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      price:
+                        type: number
+                      stock:
+                        type: integer
+        404:
+          description: Producto no encontrado.
+        400:
+          description: Error al actualizar el producto.
+    delete:
+      summary: Eliminar un producto
+      description: Permite a los administradores eliminar un producto existente por ID.
+      tags:
+        - Productos
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID del producto a eliminar.
+      responses:
+        200:
+          description: Producto eliminado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        404:
+          description: Producto no encontrado.
+        400:
+          description: Error al eliminar el producto.
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
